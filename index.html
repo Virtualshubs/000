@@ -8,32 +8,34 @@
 </style>
 </head>
 <body>
-
 <script>
 // URL REAL DEL VISOR (la que quieres ocultar)
 const REAL = "https://loader.3dtwins.tech/index.html?t=aHR0cHM6Ly92aXJ0dWFsc2h1YnMuZ2l0aHViLmlvLzAvaW5kZXguaHRtbD9uYW1lPUJhbGxvbiUyMERvZyZjb25maWc9T2JqZWN0XzIlM0ElMjM2NjljMzUlN0NPYmplY3RfMyUzQSUyMzY2OWMzNSU3Q09iamVjdF80JTNBJTIzNjY5YzM1JTdDT2JqZWN0XzUlM0ElMjM2NjljMzUlN0NPYmplY3RfNiUzQSUyMzY2OWMzNSZxdWFudGl0eT0xJnRva2VuPTY4OTA3OWMxLWE5MmUtNDNlMS05NjYxLTllNmE4ZDE3ZjM5NCZtb2RlbFVybD1odHRwcyUzQSUyRiUyRnZpcnR1YWxzaHVicy5naXRodWIuaW8lMkZwZXJzb25hbGl6YWRvciUyRmJhbGxvbkRvZy5nbGI%3D";
 
-// Crear un host para ocultar el iframe
-const host = document.createElement('div');
-document.body.appendChild(host);
+// --- 1) Crear el host fuera del <body> ---
+const host = document.createElement("div");
+document.documentElement.appendChild(host);
 
-// Crear Shadow DOM cerrado para ocultar el contenido
-const shadow = host.attachShadow({ mode: 'closed' });
+// --- 2) Crear Shadow DOM cerrado ---
+const shadow = host.attachShadow({ mode: "closed" });
 
-// Crear el iframe oculto
-const iframe = document.createElement('iframe');
+// --- 3) Crear el iframe ---
+const iframe = document.createElement("iframe");
 iframe.src = REAL;
-iframe.setAttribute("allowfullscreen", "");
+iframe.allowFullscreen = true;
+iframe.style.cssText = `
+  width:100vw;
+  height:100vh;
+  border:none;
+  position:fixed;
+  top:0;left:0;
+`;
 
-// Ocultar estilos (aunque no importa en modo cerrado)
-iframe.style.cssText = "width:100vw;height:100vh;border:none;";
-
-// Insertar iframe dentro del shadow
+// --- 4) Insertar iframe en el shadow ---
 shadow.appendChild(iframe);
 
-// BORRAR TODO EL DOM VISIBLE
-document.body.innerHTML = "";
+// --- 5) Borrar TODO el body sin destruir el iframe ---
+document.body.remove();
 </script>
-
 </body>
 </html>
