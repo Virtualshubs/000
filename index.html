@@ -9,26 +9,20 @@
 </head>
 <body>
 <script>
-// URL real que queremos ocultar
 const REAL = "https://loader.3dtwins.tech/index.html?t=aHR0cHM6Ly92aXJ0dWFsc2h1YnMuZ2l0aHViLmlvLzAvaW5kZXguaHRtbD9uYW1lPUJhbGxvbiUyMERvZyZjb25maWc9T2JqZWN0XzIlM0ElMjM2NjljMzUlN0NPYmplY3RfMyUzQSUyMzY2OWMzNSU3Q09iamVjdF80JTNBJTIzNjY5YzM1JTdDT2JqZWN0XzUlM0ElMjM2NjljMzUlN0NPYmplY3RfNiUzQSUyMzY2OWMzNSZxdWFudGl0eT0xJnRva2VuPTY4OTA3OWMxLWE5MmUtNDNlMS05NjYxLTllNmE4ZDE3ZjM5NCZtb2RlbFVybD1odHRwcyUzQSUyRiUyRnZpcnR1YWxzaHVicy5naXRodWIuaW8lMkZwZXJzb25hbGl6YWRvciUyRmJhbGxvbkRvZy5nbGI%3D";
 
-// --- Crear host fuera del body ---
 const host = document.createElement("div");
 document.documentElement.appendChild(host);
 
-// --- Crear Shadow DOM cerrado ---
 const shadow = host.attachShadow({mode:"closed"});
 
-// --- Crear iframe ---
 const iframe = document.createElement("iframe");
 iframe.src = REAL;
 iframe.allowFullscreen = true;
 iframe.style.cssText = "width:100vw;height:100vh;border:none;position:fixed;top:0;left:0;";
 
-// --- Insertar iframe en Shadow DOM ---
 shadow.appendChild(iframe);
 
-// --- Borrar todo el body para que no quede rastro ---
 document.body.remove();
 </script>
 </body>
